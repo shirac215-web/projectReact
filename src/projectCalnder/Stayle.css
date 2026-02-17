@@ -1,0 +1,599 @@
+/* סידור החודשים - מרכוז וריווח */
+.months-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px; 
+  justify-content: center;
+  padding: 40px;
+  background-color: #f0f2f5; /* רקע עדין לכל הדף שמוציא את הלוחות החוצה */
+}
+
+/* כרטיסייה של חודש בודד - גדולה ובולטת */
+.month-card {
+    border-radius: 20px;
+    padding: 35px;
+    background-color: #ffffff;
+    width: 1500px; /* הגדלה משמעותית של החודש */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12); /* צל עמוק יותר למראה יוקרתי */
+    margin: 30px auto; /* מרכוז החודש בדף */
+}
+
+.month-card h2 {
+    font-size: 3.5rem; /* שם חודש ענקי ובולט */
+    font-weight: 800;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+/* שורת הכותרת של ימי השבוע */
+.days-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: #7f8c8d;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 3px solid #f9f9f9;
+}
+
+/* גריד הימים */
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px; /* רווח ברור בין המשבצות */
+}
+
+/* עיצוב משבצת יום - גדולה ובולטת */
+.day-cell {
+  min-height: 160px; 
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 12px; /* פינות עגולות יותר */
+  border: 1px solid #f0f0f0;
+  background-color: #fff;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+/* אפקט הדגשה בולט במעבר עכבר */
+.day-cell:hover {
+  transform: translateY(-5px); /* קפיצה קלה למעלה */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12); /* צל חזק יותר ב-hover */
+  z-index: 5;
+  border-color: #3498db; /* צבע מסגרת משתנה ב-hover */
+}
+
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.day-name {
+  font-weight: 900;
+  font-size: 1.6rem; 
+  color: #34495e;
+}
+
+/* כפתור הפלוס - הפכתי אותו ליותר בולט ומעוצב */
+.add-event-plus-btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  opacity: 0.6; /* חצי שקוף כשלא נוגעים */
+}
+
+.day-cell:hover .add-event-plus-btn {
+  opacity: 1; /* נהיה בולט רק כשעוברים על היום */
+}
+
+.add-event-plus-btn:hover {
+  background: #2980b9;
+}
+
+/* עיצוב האירועים בתוך היום - קריא וברור */
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+.event-item {
+  font-size: 1.1rem;
+  background: rgba(52, 152, 219, 0.1); /* רקע כחלחל עדין */
+  color: #2980b9;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border-right: 4px solid #3498db; /* פס צבע בצד האירוע */
+  font-weight: 500;
+  word-break: break-all;
+}
+
+/* התאמת ה-From (סרגל הכלים) */
+.From-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background: #fff;
+  padding: 30px;
+  margin: 20px auto;
+  width: fit-content;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border: 1px solid #eee;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.From-container input[type="text"],
+.From-container select {
+  padding: 12px;
+  border: 2px solid #f0f0f0;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.From-container input:focus, .From-container select:focus {
+  border-color: #3498db;
+}
+
+/* מיכל ראשי */
+.From-container {
+    display: flex; /* מעמיד את האלמנטים בשורה */
+    flex-wrap: wrap; /* מאפשר ירידת שורה אם המסך צר מדי */
+    align-items: flex-end; /* מיישר את כולם לקו התחתון (חשוב בגלל התוויות) */
+    gap: 15px; /* רווח בין האלמנטים */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    direction: rtl; /* במידה ואת רוצה סדר מימין לשמאל */
+}
+
+/* כותרות לייבלים */
+.From-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+}
+
+/* שדות קלט (טקסט ובחירה) */
+.From-container input[type="text"],
+.From-container select {
+    /* width: 100%; */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box; /* מבטיח שהפדינג לא יחרוג מהרוחב */
+}
+
+/* שדות בחירת צבע */
+input[type="color"] {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+/* כפתור שמירה */
+.From-container button {
+    /* width: 100%; */
+    padding: 12px;
+    background-color: #7fa8d4;
+    /* color: white; */
+    border: none;
+    border-radius: 6px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.From-container button:hover {
+    background-color: #0056b3;
+}
+
+/* שיפור מראה ה-Select כשהוא במצב מבוטל */
+.From-container option:disabled {
+    color: #999;
+}
+
+/* הריבוע שמאגד את כל הכפתורים */
+.controls-box {
+  display: flex;
+  flex-direction: row;    /* סידור בשורה */
+  flex-wrap: wrap;        /* גלישה לשורה הבאה אם הריבוע קטן מדי */
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  
+  background: white;      /* צבע הריבוע */
+  padding: 25px;
+  border: 2px solid #007bff; /* מסגרת בולטת */
+  border-radius: 15px;    /* פינות מעוגלות */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* צל שנותן עומק */
+  max-width: fit-content; /* הריבוע יתכווץ לפי התוכן שלו */
+}
+
+/* התאמת הכפתור בתוך הריבוע */
+button {
+  margin-top: 0 !important;
+  white-space: nowrap; /* מונע מהטקסט בכפתור להישבר */
+}
+
+/* עיצוב קבוצות הבחירה בתוך הריבוע */
+/* .control-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 10px;
+  border-left: 1px solid #eee; /* קו מפריד קטן בין האפשרויות */
+/* } */ 
+.form-group {
+    display: flex;
+    flex-direction: column; /* התווית תהיה מעל הקלט הספציפי שלה */
+    gap: 5px;
+}
+
+.control-group:first-child {
+  border-left: none; /* ביטול הקו המפריד לאלמנט הראשון */
+}
+
+.global-add-event-modal {
+    background: #f9f9f9;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 400px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    direction: rtl;
+}
+
+.global-add-event-modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.global-add-event-modal input, .global-add-event-modal select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.add-event-plus-btn {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.add-event-plus-btn:hover {
+  background: #fff;
+  color: #000;
+}
+/* הרקע המוחשך מסביב */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* רקע כהה */
+    backdrop-filter: blur(8px); /* אפקט טשטוש לרקע */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* תוכן החלון */
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 25px;
+    width: 500px;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    text-align: right;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-title {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.modal-subtitle {
+    color: #7f8c8d;
+    margin-bottom: 30px;
+}
+
+/* סידור הצבעים בשורה אחת יפה */
+.color-section {
+    display: flex;
+    justify-content: space-between;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+.color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+}
+
+.styled-input, .styled-select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.main-save-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.main-save-btn:hover {
+    transform: scale(1.02);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #bdc3c7;
+}
+/* סידור כרטיסיות הצבעים */
+.colors-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 עמודות של צבעים */
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.color-card {
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    padding: 12px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+
+.color-card:hover {
+    border-color: #3498db;
+    background: #f0f8ff;
+}
+
+.color-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+}
+
+.color-picker {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%; /* הופך את הדוגם לעגול ויפה */
+    cursor: pointer;
+    overflow: hidden;
+    background: none;
+}
+
+/* התאמת דוגם הצבע בדפדפנים */
+.color-picker::-webkit-color-swatch-wrapper { padding: 0; }
+.color-picker::-webkit-color-swatch { border: none; border-radius: 50%; }
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+.search-bar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.search-select {
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 2px solid #3498db;
+    font-size: 1rem;
+    outline: none;
+}
+
+.search-btn {
+    padding: 10px 25px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.search-btn:hover {
+    background-color: #2980b9;
+}
+
+/* אפקט ההדגשה כשמוצאים חודש */
+.highlight-month {
+    box-shadow: 0 0 30px #f1c40f !important;
+    border: 4px solid #f1c40f !important;
+    transform: scale(1.05);
+}
+/* מיכל הכרטיס המרכזי */
+.add-event-container {
+    direction: rtl;
+    background: linear-gradient(145deg, #ffffff, #f0f4f8);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    max-width: 300px;
+    margin: 20px auto;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* כותרת הטופס */
+.add-event-title {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a2a6c;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* עיצוב קבוצת קלט */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #576574;
+    margin-bottom: 6px;
+    margin-right: 4px;
+}
+
+/* עיצוב השדות */
+.event-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #eeeff1;
+    border-radius: 12px;
+    background-color: #fff;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.event-input:focus {
+    border-color: #4834d4;
+    box-shadow: 0 0 0 4px rgba(72, 52, 212, 0.1);
+}
+
+/* כפתור שמירה */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #4834d4, #686de0);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(72, 52, 212, 0.3);
+}
+
+/* כפתור ביטול */
+.btn-cancel {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #95a5a6;
+    font-size: 0.85rem;
+    margin-top: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.btn-cancel:hover {
+    color: #7f8c8d;
+    text-decoration: underline;
+}
